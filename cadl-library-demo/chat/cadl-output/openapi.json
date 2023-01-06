@@ -1,0 +1,302 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chat Service",
+    "version": "0.0.1"
+  },
+  "tags": [],
+  "paths": {
+    "/mypeeps": {
+      "get": {
+        "operationId": "MyPeoples_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MyPeople"
+                      },
+                      "x-cadl-name": "MyPeople[]",
+                      "description": "List of elements"
+                    },
+                    "nextLink": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "A link to the next page of results if present."
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "x-cadl-name": "ApiPatternLibrary.List<MyPeople>"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiPatternLibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "MyPeoples_create",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyPeople"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiPatternLibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MyPeople"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "MyPeoples_update",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyPeople"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiPatternLibrary.Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/merge-patch+json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "format": "uint8"
+                  },
+                  "newProp": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "foo",
+                  "name",
+                  "age",
+                  "newProp"
+                ],
+                "x-cadl-name": "ApiPatternLibrary.Patch<MyPeople>"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mypeeps/{id}": {
+      "get": {
+        "operationId": "MyPeoples_read",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MyPeople"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiPatternLibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "MyPeoples_delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiPatternLibrary.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MyPeople": {
+        "type": "object",
+        "properties": {
+          "foo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "foo"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Person"
+          }
+        ]
+      },
+      "ApiPatternLibrary.Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "error": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/ApiPatternLibrary.ErrorDetail"
+              }
+            ],
+            "description": "Top-level error object"
+          }
+        },
+        "description": "Error response",
+        "required": [
+          "code",
+          "error"
+        ]
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "integer",
+            "format": "uint8"
+          },
+          "newProp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "age",
+          "newProp"
+        ]
+      },
+      "ApiPatternLibrary.ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A server-defined code that uniquely identifies the error."
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable representation of the error."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApiPatternLibrary.ErrorDetail"
+            },
+            "x-cadl-name": "ApiPatternLibrary.ErrorDetail[]",
+            "description": "An array of error details about specific errors that led to this reported error."
+          }
+        },
+        "description": "Error details",
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    }
+  }
+}
