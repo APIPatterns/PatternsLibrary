@@ -1,0 +1,27 @@
+import "../../dist/lib.js";
+import "../../lib/main.cadl";
+import "@cadl-lang/rest";
+
+using Cadl.Http;
+using ApiPatternLibrary;
+
+@service({
+    title: "Chat Service",
+    version: "0.0.1",
+  })
+namespace ChatService;
+
+
+model Person {
+  name: string;
+  age: uint8;
+  newProp: string;
+}
+
+
+model MyPeople extends Person{
+    foo: string;
+}
+
+@route("/mypeeps")
+interface MyPeoples extends ResourceInterface<MyPeople>{}

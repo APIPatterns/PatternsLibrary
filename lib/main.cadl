@@ -1,6 +1,6 @@
+import "@cadl-lang/rest";
 import "../dist/index.js";
 import "./standardMethods.cadl";
 
-
-
+namespace ApiPatternLibrary;
 
