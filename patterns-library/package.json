@@ -1,11 +1,13 @@
 {
-  "name": "patternslibrary",
+  "name": "patterns-library",
   "version": "0.0.1",
   "description": "An implementation of the API Patterns described in JJ Gewax's book in cadl.",
-  "main": "dis/index.js",
+  "main": "dist/index.js",
+  "cadlMain": "lib/main.cadl",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -23,7 +25,8 @@
   },
   "homepage": "https://github.com/APIPatterns/PatternsLibrary#readme",
   "dependencies": {
-    "@cadl-lang/compiler": "^0.38.5"
+    "@cadl-lang/compiler": "^0.39.0",
+    "@cadl-lang/rest": "^0.39.0"
   },
   "devDependencies": {
     "typescript": "^4.9.4"
