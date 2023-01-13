@@ -1,0 +1,21 @@
+import "@cadl-lang/rest";
+
+//using Cadl.Http;
+
+namespace ApiPatterns;
+
+@error
+@doc("Error response")
+model OperationError {
+  @doc("A server-defined code that uniquely identifies the error.")
+  code: string;
+  @doc("A human-readable representation of the error.")
+  message: string;
+  @doc("Additional details about this error.")
+  details?: unknown;
+}
+
+// model Patch<T> {
+//   @header contentType: "application/merge-patch+json";
+//   ...T;
+// }

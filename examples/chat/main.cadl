@@ -1,0 +1,38 @@
+import "@cadl-lang/rest";
+import "patterns-library";
+
+using Cadl.Http;
+using ApiPatterns;
+
+@doc("Chat Service")
+@service({
+  title: "Chat Service",
+  version: "0.0.1",
+})
+namespace ChatService;
+
+model ChatRoom {
+  id: string;
+  name: string;
+  members: string[];
+}
+
+model ChatRooms {
+  results: ChatRoom[];
+}
+
+@route("/chatRooms")
+interface ChatRoomApi {
+  @post
+  CreateChatRoom(resource: ChatRoom): ChatRoom | OperationError;
+
+  @get
+  GetChatRoom(@path id: string): ChatRoom | OperationError;
+
+  @get
+  ListChatRooms(@query filter: string): ChatRooms | OperationError;
+
+  @patch
+  UpdateChatRoom(@path id: string, resource: ChatRoom): ChatRoom | OperationError;
+}
+
