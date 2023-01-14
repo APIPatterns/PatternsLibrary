@@ -11,6 +11,9 @@ using ApiPatterns;
 })
 namespace ChatService;
 
+
+//ChatRoom 
+
 model ChatRoom {
   id: string;
   name: string;
@@ -21,18 +24,29 @@ model ChatRooms {
   results: ChatRoom[];
 }
 
-@route("/chatRooms")
-interface ChatRoomApi {
-  @post
-  CreateChatRoom(resource: ChatRoom): ChatRoom | OperationError;
-
-  @get
-  GetChatRoom(@path id: string): ChatRoom | OperationError;
-
-  @get
-  ListChatRooms(@query filter: string): ChatRooms | OperationError;
-
-  @patch
-  UpdateChatRoom(@path id: string, resource: ChatRoom): ChatRoom | OperationError;
+model Message{
+  id: string;
+  chatRoomId: string;
+  authorUserId: string;
+  content: string;
+  attachment?:string;
 }
 
+@route("/chatRooms")
+interface ChatRoomApi extends ResourceOperations<ChatRoom>{
+  
+};
+
+//TODO: Determine if augment decorators will work to enable us to document the individual operations inside the interface.
+//https://github.com/microsoft/cadl/issues/1541
+@@doc(ChatRoomApi.create, "Create a new chat room")
+
+
+
+
+/*
+@route("{ChatRoom.id}/messages")
+interface MessageApi<Message>{
+createMesseage is CreateResource<Message>;
+};
+*/
