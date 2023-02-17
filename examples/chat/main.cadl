@@ -34,7 +34,7 @@ model Message{
 
 @route("/chatRooms")
 interface ChatRoomApi extends ResourceOperations<ChatRoom>{
-  
+
 };
 
 //TODO: Determine if augment decorators will work to enable us to document the individual operations inside the interface.

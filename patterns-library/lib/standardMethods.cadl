@@ -18,7 +18,7 @@ model OperationError {
 
 // *** Standard Operations ***
 /*
-The opersations below are based on the API design patterns described in chapter 7 of the API Design Pattners book.
+The operations below are based on the API design patterns described in chapter 7 of the API Design Pattners book.
 These represent an interpretation--and are intended to be a starting point for discussion.
 If you have thoughts on how to improve these, please start a conversation in the PatternsLibrary repo.
 https://github.com/APIPatterns/PatternsLibrary/discussions
